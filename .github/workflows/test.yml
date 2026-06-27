@@ -21,3 +21,24 @@ jobs:
 
       - name: Run tests
         run: npm test
+  deploy:
+    needs: test
+
+    runs-on: ubuntu-latest
+
+    defaults:
+      run:
+        working-directory: React_App
+
+    steps:
+      - name: Get code
+        uses: actions/checkout@v4
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build project
+        run: npm run build
+
+      - name: Deploy to GitHub Pages
+        run: echo "Deploying to GitHub Pages..."
